@@ -1,0 +1,22 @@
+*INFORMAÇÕES SOBRE O DESAFIO:*
+
+O código foi criado usando um princípio básico de padrão de arquitetura MVC (Model-View-Controller, que separa os conceitos de manipulação de dados, visualização/inputs do usuário, lógica da aplicação (regra de negócio). Neste caso, por ser uma aplicação simples, dividi a regra de negócio e a manipulação de banco de dados em módulos separados (app.py e utils.py).
+
+Foi usado o modelo de maturidade Richardson nível 2 informando métodos HTTP (GET) para performar as operações. O serviço também é baseado em recursos (neste caso, intervalos de prêmios) que podem ser acessados por URLs. O endpoint /awards/intervals representa o recurso. Ele segue o princípio da interface uniforme ao utilizar métodos HTTP padrão (GET) e retornar dados JSON, que é um formato comum para APIs web.
+
+*Informações importantes:*
+
+* As instruções de uso constam no arquivo readme.md.
+* O arquivo com os dados deve ser salvo na pasta /files sob o nome movielist.csv.
+* Objetos JSON não são estruturas ordenadas, por este motivo a chave 'max' aparece antes da chave 'min' no output, o que não influencia na utilização dos dados.
+* O resultado do endopint pode trazer mais de um produtor que teve o intervalo minimo ou maximo, pois podem haver intervalos iguais e não existia nenhum critério de desempate nas recomendações do desafio.
+
+*SOBRE OS TESTES DE INTEGRAÇÃO:*
+
+Criei alguns testes para analisar o conteúdo de entrada do arquivo, e também a saída dos dados:
+
+* Teste que verifica se a saída contém a estrutura desejada (pelo menos um dicionário para min e um com a key max);
+* Teste que verifica se há uma lista disponivel com dados para cada uma das keys (min e max);
+* Teste que verifica se o cabeçalho do arquivo contém a quantidade de informação necessária para processamento;
+* Teste que verifica se o cabeçalho do arquivo está correto com as informações que são necessárias para processamento;
+* Há teste para quando o arquivo não está disponivel, porém este é tratado dentro do código principal em tempo de execução;
