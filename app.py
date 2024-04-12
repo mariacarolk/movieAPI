@@ -9,7 +9,7 @@ def initialize_database():
     conn = utils.get_db()
     utils.create_table(conn)
 
-    file_path_csv = os.path.join(os.path.dirname(__file__), 'files', 'movielists.csv')
+    file_path_csv = os.path.join(os.path.dirname(__file__), 'files', 'movielist.csv')
 
     # Check if the CSV file exists
     if not os.path.exists(file_path_csv):

@@ -1,5 +1,6 @@
 *INFORMAÇÕES SOBRE O DESAFIO:*
 
+O projeto foi escrito em inglês por se tratar de uma vaga possivelmente internacional.
 O código foi criado usando um princípio básico de padrão de arquitetura MVC (Model-View-Controller, que separa os conceitos de manipulação de dados, visualização/inputs do usuário, lógica da aplicação (regra de negócio). Neste caso, por ser uma aplicação simples, dividi a regra de negócio e a manipulação de banco de dados em módulos separados (app.py e utils.py).
 
 Foi usado o modelo de maturidade Richardson nível 2 informando métodos HTTP (GET) para performar as operações. O serviço também é baseado em recursos (neste caso, intervalos de prêmios) que podem ser acessados por URLs. O endpoint /awards/intervals representa o recurso. Ele segue o princípio da interface uniforme ao utilizar métodos HTTP padrão (GET) e retornar dados JSON, que é um formato comum para APIs web.
