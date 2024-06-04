@@ -22,7 +22,7 @@ class QueryError(Exception):
 
 def get_db():
     try:
-        return sqlite3.connect(':memory:')
+        return sqlite3.connect(':memory:', check_same_thread=False)
     except sqlite3.Error as e:
         raise DatabaseError(str(e))
 

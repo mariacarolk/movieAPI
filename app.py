@@ -2,10 +2,18 @@ from flask import Flask, jsonify, abort
 import csv
 import os
 import utils
+import re
 
 app = Flask(__name__)
 
+def parse_producers(producer_string):
+    producers = []
+    for producer in re.split(r'\band\b|,', producer_string):
+        producers.append(producer.strip())
+    return producers
+
 def initialize_database():
+    global conn
     conn = utils.get_db()
     utils.create_table(conn)
 
@@ -19,11 +27,18 @@ def initialize_database():
     with open(file_path_csv, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
-            utils.insert_movie(row, conn)
-
+            producers = parse_producers(row['producers'])
+            for producer in producers:
+                if producer:
+                    row['producers'] = producer
+                    utils.insert_movie(row, conn)
+    print('Banco de dados inicializado com sucesso!')
     return conn
 
-def calculate_intervals(conn):
+conn = initialize_database()
+
+def calculate_intervals():
+    global conn
     intervals = {"min": [], "max": []}
     min_interval = 0
     max_interval = 0
@@ -75,9 +90,7 @@ def calculate_intervals(conn):
 
 @app.route('/awards/intervals', methods=['GET'])
 def get_awards_intervals():
-    conn = initialize_database()
-    intervals = calculate_intervals(conn)
-
+    intervals = calculate_intervals()
     return jsonify(intervals)
 
 if __name__ == '__main__':
